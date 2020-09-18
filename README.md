@@ -1,0 +1,2 @@
+# UnityAssetBundleDiffKun
+AssetBundleの中身に対して差分を比較する為のEditor拡張
