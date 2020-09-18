@@ -8,6 +8,8 @@ AssetBundleの中身に対して差分を比較する為のEditor拡張
 
 これは、AssetBundleの中身を比較してその変更差分を知る為のEditor拡張です。
 
+![img](Graphics/UnityAssetBundleDiffKun.png)
+
 ## インストール
 
 UnityAsseBundleDiffKunは別途[UnityCommandLineTools](https://github.com/katsumasa/UnityCommandLineTools)を必要とします。
