@@ -1,4 +1,7 @@
 # UnityAssetBundleDiffKun
+
+![GitHub package.json version](https://img.shields.io/github/package-json/v/katsumasa/UnityAssetBundleDiffKun)
+
 AssetBundleの中身に対して差分を比較する為のEditor拡張
 
 ## 概要
@@ -8,7 +11,7 @@ AssetBundleの中身に対して差分を比較する為のEditor拡張
 
 これは、AssetBundleの中身を比較してその変更差分を知る為のEditor拡張です。
 
-![img](Graphics/UnityAssetBundleDiffKun.png)
+![UnityAssetBundleDiffKun](https://user-images.githubusercontent.com/29646672/137438506-ee9cc60e-b5e5-4d2d-9700-a0ea6c23c17e.png)
 
 ## インストール
 
