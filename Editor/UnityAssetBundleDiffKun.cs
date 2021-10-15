@@ -268,14 +268,14 @@ namespace UTJ.UnityAssetBundleDiffKun
         // <summary>
         // EditorWindowを開く
         // </summary>
-        [MenuItem("Window/UnityAssetBundleDiffKun")]
+        [MenuItem("Window/UTJ/UnityAssetBundleDiffKun")]
         static void Create()
         {
             if (editorWindow == null)
             {
                 editorWindow = (UnityAssetBundleDiffKunEditorWindow)EditorWindow.GetWindow(typeof(UnityAssetBundleDiffKunEditorWindow));
             }
-            editorWindow.title = "UnityAssetBundleDiffKun";
+            editorWindow.titleContent = new GUIContent("UnityAssetBundleDiffKun");
             editorWindow.wantsMouseMove = true;
             editorWindow.autoRepaintOnSceneChange = true;
             editorWindow.Show();
