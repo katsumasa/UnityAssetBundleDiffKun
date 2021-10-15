@@ -1,0 +1,24 @@
+{
+  "name": "com.utj.unityassetbundlediffkun",
+  "displayName": "UnityAssetBundleDiffKun",
+  "version": "0.1.0",
+  "unity": "2019.3",
+  "keywords": [
+    "unity",
+    "editor",
+    "tools"
+  ],
+  "description": "Compare AssetBundle",
+  "dependencies": {
+    "com.utj.unitycommandlinetools": "0.1.0"
+  },
+  "relatedPackages": {
+  },
+  "upmCi": {
+  },
+  "repository": {
+    "url": "https://github.com/katsumasa/UnityAssetBundleDiffKun.git",
+    "type": "git",
+    "revision": ""
+  }
+}

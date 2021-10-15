@@ -1,0 +1,17 @@
+{
+    "name": "UTJ.UnityAssetBundleDiffKun",
+    "references": [
+        "GUID:60d6489e9615bff45b5ef22bb8f4d0ca"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
