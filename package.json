@@ -12,6 +12,11 @@
   "dependencies": {
     "com.utj.unitycommandlinetools": "0.1.0"
   },
+  "author": {
+    "name": "Katsumasa.Kimura",
+    "email": "katsumasa@unity3d.com",
+    "url": "https://github.com/katsumasa"
+  },
   "relatedPackages": {
   },
   "upmCi": {
