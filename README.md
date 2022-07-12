@@ -18,7 +18,7 @@ AssetBundleの中身に対して差分を比較する為のEditor拡張
 UnityAsseBundleDiffKunは別途[UnityCommandLineTools](https://github.com/katsumasa/UnityCommandLineTools)を必要とします。
 本リポジトリと合わせてUnityCommandLineToolsを取得して下さい。
 
-```
+```:console
 git clone https://github.com/katsumasa/UnityAssetBundleDiffKun.git
 git clone https://github.com/katsumasa/UnityCommandLineTools.git
 ```
@@ -38,3 +38,7 @@ git clone https://github.com/katsumasa/UnityCommandLineTools.git
 ## 参考URL
 
 https://support.unity3d.com/hc/en-us/articles/217123266-How-do-I-determine-what-is-in-my-Scene-bundle-
+
+## その他
+
+不具合、ご要望がありましたら、[Issues](https://github.com/katsumasa/UnityAssetBundleDiffKun/issues)から報告をお願いします。(対応を約束することは出来ませんが可能であれば検討致します。)

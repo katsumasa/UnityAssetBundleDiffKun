@@ -212,7 +212,7 @@ namespace UTJ.UnityAssetBundleDiffKun
             File.Copy(src, dst, true);
             var exec = new WebExtractExec();
             var path = Path.Combine(workFolderPath, assetBundleFileName);
-            var result = exec.Exec(path);
+            var result = exec.Exec($@"""{path}""");
             var execFolderPath = dst + "_data";
 
             if (mAssetPaths == null)
@@ -304,6 +304,7 @@ namespace UTJ.UnityAssetBundleDiffKun
 
             mDiffView.textFile1Path = mABTextView[0].textFilePath;
             mDiffView.textFile2Path = mABTextView[1].textFilePath;
+            mDiffView.callback = Verify;
             mDiffView.OnGUI();
 
             mABTextView[1].OnGUI();
