@@ -357,10 +357,12 @@ namespace UTJ.UnityAssetBundleDiffKun
             {
                 if(mABTextView[0].assetNames.Contains(mABTextView[1].assetNames[i]) == false)
                 {
+                    EditorUtility.DisplayDialog("Verify", "Invalid serialize file.", "OK");
                     return 2;
                 }
                 if(mABTextView[1].assetNames.Contains(mABTextView[0].assetNames[i]) == false)
                 {
+                    EditorUtility.DisplayDialog("Verify", "Invalid serialize file.", "OK");
                     return 3;
                 }
             }
