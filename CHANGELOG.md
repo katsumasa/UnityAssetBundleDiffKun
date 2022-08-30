@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.3] - 2022-08-30
+
+- [Changed] WebExtract及びBin2Text実行に表示されるダイヤログのメッセージ内容を調整
+- [Fixed] Verify実行時にダイヤログが複数回表示されていた不具合を修正
+- [Fixed] Verifyボタンのレイアウトを修正
+
 ## [0.1.2] - 2022-08-30
 
 - [Changed] リソースファイルに対してbin2textを実行するとエラーとなるので、bin2textの対象はSerializeファイルのみにした。

@@ -58,22 +58,11 @@ namespace UTJ.UnityAssetBundleDiffKun
             }
             mOptionSelectIdx = EditorGUILayout.Popup(mOptionSelectIdx, mOptions);
             GUILayout.EndHorizontal();
-            mScrollPos = EditorGUILayout.BeginScrollView(mScrollPos);
-
-            if (GUILayout.Button("Verify")){
+            if (GUILayout.Button("Verify"))
+            {
                 var result = mCallback();
-                if(result == -1)
-                {
-                    mText = "AssetBundleを設定してください。";
-                } else if(result == 0)
-                {
-                    mText = "AssetBundleは完全一致しました";
-                } else
-                {
-                    mText = "AssetBundleは一致しませんでした。";
-                }
             }
-
+            mScrollPos = EditorGUILayout.BeginScrollView(mScrollPos);            
             EditorGUILayout.TextArea(mText, GUILayout.ExpandHeight(true));
             EditorGUILayout.EndScrollView();
             GUILayout.EndVertical();
@@ -176,7 +165,7 @@ namespace UTJ.UnityAssetBundleDiffKun
             {
                 if (mObject != null)
                 {
-                    WebExtract();
+                    WebExtract(true);
                 }
             }
             mObject = EditorGUILayout.ObjectField(mObject, typeof(Object), true);
@@ -185,7 +174,7 @@ namespace UTJ.UnityAssetBundleDiffKun
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Bin2Text"))
             {
-                Bin2Text();
+                Bin2Text(true);
             }
             mSelectedIndex = EditorGUILayout.Popup(mSelectedIndex, mAssetNames);
             GUILayout.EndHorizontal();
@@ -199,8 +188,8 @@ namespace UTJ.UnityAssetBundleDiffKun
         // <summary>
         // AssetBundleを展開する
         // </summary>
-        public void WebExtract()
-        {
+        public int WebExtract(bool IsOpenSuccessDialog)
+        {            
             var workFolderPath = Path.Combine(Application.temporaryCachePath, mWorkFolderBase);
             if (Directory.Exists(workFolderPath) == false)
             {
@@ -213,7 +202,15 @@ namespace UTJ.UnityAssetBundleDiffKun
             var exec = new WebExtractExec();
             var path = Path.Combine(workFolderPath, assetBundleFileName);
             var result = exec.Exec($@"""{path}""");
-            EditorUtility.DisplayDialog(result == 0 ? "Success" : "Fail", exec.output, "OK");
+            if(result != 0)
+            {
+                EditorUtility.DisplayDialog("WebExtract", "Fail", "OK");
+                return result;
+            }
+            else if (IsOpenSuccessDialog)
+            {
+                EditorUtility.DisplayDialog("WebExtract", "Success", "OK");
+            }                        
             var execFolderPath = dst + "_data";
 
             if (mAssetPaths == null)
@@ -238,12 +235,14 @@ namespace UTJ.UnityAssetBundleDiffKun
                 mAssetNames[i] = Path.GetFileName(mAssetPaths[i]);                
             }
             mSelectedIndex = 0;
+
+            return 0;
         }
 
         // <summary>
         // bin2textを実行する
         // </summary>
-        public void Bin2Text()
+        public int Bin2Text(bool IsOpenSuccessDialog)
         {
             if (mSelectedIndex != -1)
             {
@@ -251,10 +250,22 @@ namespace UTJ.UnityAssetBundleDiffKun
                 mTextFilePath = Path.Combine(workFolderPath, mAssetNames[mSelectedIndex]) + ".txt";
                 var b2t = new Binary2TextExec();
                 var result = b2t.Exec(mAssetPaths[mSelectedIndex], mTextFilePath, "");
-                EditorUtility.DisplayDialog(result == 0 ? "Success" : "Fail", b2t.output, "OK");
-                mText = File.ReadAllText(mTextFilePath);
-            }
 
+                if (result != 0)
+                {
+                    EditorUtility.DisplayDialog("Bin2Text", b2t.output, "OK");
+                }
+                else if (IsOpenSuccessDialog)
+                {
+                    EditorUtility.DisplayDialog("Bin2Text", "Success", "OK");
+                }                    
+                return result;
+            }
+            else
+            {
+                EditorUtility.DisplayDialog("Bin2Text", "File is not selected.", "OK");
+            }
+            return -1;
         }
     }
 
@@ -316,12 +327,24 @@ namespace UTJ.UnityAssetBundleDiffKun
 
         int Verify()
         {
+
             if(mABTextView[0].obj == null || mABTextView[1].obj == null)
             {
+                EditorUtility.DisplayDialog("Verify", "The AssetBundle to be compared is not set.", "OK");
+
                 return -1;
             }
-            mABTextView[0].WebExtract();
-            mABTextView[1].WebExtract();
+            int result;
+            result = mABTextView[0].WebExtract(false);
+            if(result != 0)
+            {
+                return -2;
+            }
+            result = mABTextView[1].WebExtract(false);
+            if(result != 0)
+            {
+                return -3;
+            }
             if(mABTextView[0].assetNames.Length != mABTextView[1].assetNames.Length)
             {
                 return 1;
@@ -342,14 +365,26 @@ namespace UTJ.UnityAssetBundleDiffKun
             {
                 mABTextView[0].selectIndex = i;
                 mABTextView[1].selectIndex = i;
-                mABTextView[0].Bin2Text();
-                mABTextView[1].Bin2Text();
-                var result = mDiffView.Diff();
+                result = mABTextView[0].Bin2Text(false);
                 if(result != 0)
                 {
+                    return -4;
+                }
+                result = mABTextView[1].Bin2Text(false);
+                if(result != 0)
+                {
+                    return -5;
+                }
+                result = mDiffView.Diff();
+                if(result != 0)
+                {
+                    EditorUtility.DisplayDialog("Verify", "No match.", "OK");
                     return 4;
                 }
             }
+
+            EditorUtility.DisplayDialog("Verify", "Match", "OK");
+
             return 0;
         }
     }
