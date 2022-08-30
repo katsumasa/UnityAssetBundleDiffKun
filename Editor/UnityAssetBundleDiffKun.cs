@@ -250,14 +250,18 @@ namespace UTJ.UnityAssetBundleDiffKun
                 mTextFilePath = Path.Combine(workFolderPath, mAssetNames[mSelectedIndex]) + ".txt";
                 var b2t = new Binary2TextExec();
                 var result = b2t.Exec(mAssetPaths[mSelectedIndex], mTextFilePath, "");
-
+                        
                 if (result != 0)
                 {
                     EditorUtility.DisplayDialog("Bin2Text", b2t.output, "OK");
                 }
-                else if (IsOpenSuccessDialog)
+                else 
                 {
-                    EditorUtility.DisplayDialog("Bin2Text", "Success", "OK");
+                    mText = File.ReadAllText(mTextFilePath);
+                    if (IsOpenSuccessDialog)
+                    {
+                        EditorUtility.DisplayDialog("Bin2Text", "Success", "OK");
+                    }
                 }                    
                 return result;
             }
