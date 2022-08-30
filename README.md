@@ -25,7 +25,7 @@ git clone https://github.com/katsumasa/UnityCommandLineTools.git
 
 ## 使い方
 
-`Window > UnityAssetBundleDiffKun`でEditorWindowを起動します。
+`Window > UTJ > UnityAssetBundleDiffKun`でEditorWindowを起動します。
 比較を行いたい二つのAssetBundleをそれぞれ左右のObject Fieldへ指定します。
 
 - [Object Field] 比較を行うAssetBundleを左右のそれぞれの[Object Field]へ設定します。

@@ -1,13 +1,16 @@
 # Changelog
 
+## [0.1.2] - 2022-08-30
+
+- [Changed] リソースファイルに対してbin2textを実行するとエラーとなるので、bin2textの対象はSerializeファイルのみにした。
+- [Changed] WebExtract及びBin2Text実行時に結果をポップアップに表示するようにした。
+
 ## [0.1.1] - 2022-07-12
 
 - 「WebExtract」を押した時に DirectoryNotFoundException が表示される不具合を修正
 - 「Verify」を押した時に NullReferenceException が表示不具合を修正
 
 ## [0.1.0] - 2021-10-15
-
-### Changes
 
 - [0.1.1] Bug Fixed
 - [0.1.0] 1st Release
