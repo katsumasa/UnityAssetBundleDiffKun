@@ -213,6 +213,7 @@ namespace UTJ.UnityAssetBundleDiffKun
             var exec = new WebExtractExec();
             var path = Path.Combine(workFolderPath, assetBundleFileName);
             var result = exec.Exec($@"""{path}""");
+            EditorUtility.DisplayDialog(result == 0 ? "Success" : "Fail", exec.output, "OK");
             var execFolderPath = dst + "_data";
 
             if (mAssetPaths == null)
@@ -226,8 +227,8 @@ namespace UTJ.UnityAssetBundleDiffKun
 
             var files = Directory.GetFiles(execFolderPath, "BuildPlayer-*", SearchOption.AllDirectories);
             mAssetPaths.AddRange(files);
-
-            files = Directory.GetFiles(execFolderPath, "CAB-*", SearchOption.AllDirectories);
+            // リソースファイルを含めない(拡張子無しのファイルのみを含める)ように修正
+            files = Directory.GetFiles(execFolderPath, "CAB-*.", SearchOption.AllDirectories);
             mAssetPaths.AddRange(files);
             mAssetPaths.Sort();
 
@@ -249,7 +250,8 @@ namespace UTJ.UnityAssetBundleDiffKun
                 var workFolderPath = Path.Combine(Application.temporaryCachePath, mWorkFolderBase);
                 mTextFilePath = Path.Combine(workFolderPath, mAssetNames[mSelectedIndex]) + ".txt";
                 var b2t = new Binary2TextExec();
-                b2t.Exec(mAssetPaths[mSelectedIndex], mTextFilePath, "");
+                var result = b2t.Exec(mAssetPaths[mSelectedIndex], mTextFilePath, "");
+                EditorUtility.DisplayDialog(result == 0 ? "Success" : "Fail", b2t.output, "OK");
                 mText = File.ReadAllText(mTextFilePath);
             }
 
